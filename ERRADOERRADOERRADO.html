@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Erro</title>
+
+<style>
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: black;
+    cursor: none;
+}
+
+/* Fundo */
+.glitch {
+    position: fixed;
+    inset: 0;
+    background: url("Erro.gif") center center / cover no-repeat;
+    animation: glitchMove 2s infinite;
+}
+
+/* Camadas de glitch */
+.glitch::before,
+.glitch::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: inherit;
+    mix-blend-mode: screen;
+    opacity: 0.7;
+}
+
+.glitch::before {
+    animation: glitchRed 0.15s infinite;
+    filter: hue-rotate(20deg);
+}
+
+.glitch::after {
+    animation: glitchBlue 0.2s infinite;
+    filter: hue-rotate(-20deg);
+}
+
+/* Animações */
+@keyframes glitchMove {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(2px, -2px); }
+    60% { transform: translate(-1px, 1px); }
+    80% { transform: translate(1px, -1px); }
+    100% { transform: translate(0); }
+}
+
+@keyframes glitchRed {
+    0% { transform: translate(2px, 0); }
+    50% { transform: translate(-2px, 0); }
+    100% { transform: translate(2px, 0); }
+}
+
+@keyframes glitchBlue {
+    0% { transform: translate(0, 2px); }
+    50% { transform: translate(0, -2px); }
+    100% { transform: translate(0, 2px); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="glitch"></div>
+
+<audio id="audio" loop>
+    <source src="Erro.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const audio = document.getElementById("audio");
+
+function goFullScreen() {
+    const el = document.documentElement;
+    if (el.requestFullscreen) el.requestFullscreen();
+}
+
+document.addEventListener("click", () => {
+    goFullScreen();
+    audio.play();
+}, { once: true });
+</script>
+
+</body>
+</html>
